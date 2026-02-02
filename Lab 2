@@ -1,1 +1,19 @@
+https://colab.research.google.com/drive/15CIxz__N7dcjRKI8mCoLg2hKXn12GF8f?authuser=0#scrollTo=s-95jcKbNj_V
+import numpy as np
+# for AND gate (Input/Output)
+x_list = np.array([[2,2],[-2,2],[-1,1],[1,-2]])
+y_list = np.array([0,0,1,1])
+epochs = 5
 
+w,b = np.zeros(2),0
+
+for _ in range(epochs):
+  for x,y in zip(x_list,y_list):
+    z = np.dot(x,w) + b
+    ### condition area for y_pred
+    y_pred = 1 if z >= 0 else 0
+    E = y - y_pred
+    print("error : ",E,"<- at epoch",_)
+    w += E*x
+    b += E
+    print(w,b)
