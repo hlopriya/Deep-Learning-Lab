@@ -1,0 +1,135 @@
+Q1. We have (.6, .1) inputs ---> 1 is output [using Gradients descent]
+import numpy as np
+
+# Inputs
+x1, x2 = 0.6, 0.1
+y = 1
+
+# Parameters
+w1, w2, b = 0.2, -0.3, 0.4
+lr = 40 # <- Here lr changes to 0.1 -> 40
+
+# Sigmoid
+def sigmoid(z):
+    return 1/(1+np.exp(-z))
+
+# Forward pass
+z = w1*x1 + w2*x2 + b
+y_pred = sigmoid(z)
+
+# Loss derivative
+dL_dy_pred = y_pred - y
+
+# Sigmoid derivative
+dy_pred_dz = y_pred*(1-y_pred)
+
+# Chain rule
+dL_dz = dL_dy_pred * dy_pred_dz
+
+# Gradients
+dL_dw1 = dL_dz * x1
+dL_dw2 = dL_dz * x2
+dL_db = dL_dz
+
+# Update
+w1 -= lr*dL_dw1
+w2 -= lr*dL_dw2
+b  -= lr*dL_db
+
+print(w1, w2, b)
+
+# Checking the output of network
+z = w1*x1 + w2*x2 + b
+y_pred = sigmoid(z)
+print("Y_pred :",y_pred,"\ny_pred :",round(y_pred,2),"(round off)")
+
+
+# AND Gate [using Gradients descent]
+
+import numpy as np
+
+# AND data
+X = np.array([
+    [0,0],
+    [0,1],
+    [1,0],
+    [1,1]
+])
+
+y = np.array([0,0,0,1])
+
+# Parameters
+w = np.array([0.1, 0.2])
+b = 0.3
+lr = 40
+
+def sigmoid(z):
+    return 1/(1+np.exp(-z))
+
+# Training
+for epoch in range(1000):
+    for i in range(len(X)):
+        z = np.dot(X[i], w) + b
+        y_pred = sigmoid(z)
+
+        # BCE + Sigmoid gradient shortcut
+        dz = y_pred - y[i]
+        dw = dz * X[i]
+        db = dz
+        w -= lr * dw
+        b -= lr * db
+
+print("Weights:", w)
+print("Bias:", b)
+# Output of network for AND Gate
+res = sigmoid(np.dot(X, w) + b)
+print(res)
+rounded_list_dec = [round(x.item(), 2) for x in res] # <- here item() remove np.float vala seen
+print(rounded_list_dec) # <- just round off values
+
+# OR Gate [using Gradients descent]
+import numpy as np
+
+# OR data
+X = np.array([
+    [0,0],
+    [0,1],
+    [1,0],
+    [1,1]
+])
+
+y = np.array([0,1,1,1])
+
+# Parameters
+w = np.array([0.1, 0.2])
+b = 0.3
+lr = 40
+
+def sigmoid(z):
+    return 1/(1+np.exp(-z))
+
+def loss(yog, yp): return ((yp-yog)**2) * .5
+
+loss_li = []
+# Training
+for epoch in range(1000):
+    for i in range(len(X)):
+        z = np.dot(X[i], w) + b
+        y_pred = sigmoid(z)
+
+        # BCE + Sigmoid gradient shortcut
+        dz = y_pred - y[i] # hen paired with a sigmoid output, it simplifies significantly, directly driving weight updates based on the error (y-y).
+        dw = dz * X[i]
+        db = dz
+        w -= lr * dw
+        b -= lr * db
+
+print("Weights:", w)
+print("Bias:", b)
+# Output of network for OR Gate
+res2 = np.dot(X, w) + b
+res2 = sigmoid(res2)
+print(res2)
+round_list = [round(x.item(), 2) for x in res2] # <- here item() remove np.float vala seen
+print(round_list)
+
