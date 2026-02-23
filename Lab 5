@@ -1,0 +1,110 @@
+(a) XOR Gate using Multilayer Perceptron with Step Function
+import numpy as np
+
+# step function
+def step_function(z):
+    return 1 if z >= 0 else 0
+
+# OR gate
+def OR_perceptron(x):
+   
+    w = np.array([1, 1])
+    b = -0.5
+    z = np.dot(x, w) + b
+    return step_function(z)
+
+def NAND_perceptron(x):
+    w = np.array([-1, -1])
+    b = 1.5
+    z = np.dot(x, w) + b
+    return step_function(z)
+
+#  AND gate
+def AND_perceptron(x):
+    w = np.array([0.5, 0.5])
+    b = -0.7
+    z = np.dot(x, w) + b
+    return step_function(z)
+
+# XOR gate using step function
+def XOR_MLP_step(x):
+    h1 = OR_perceptron(x)
+    h2 = NAND_perceptron(x)
+
+    output_input = np.array([h1, h2])
+    y = AND_perceptron(output_input)
+    return y
+
+# Test the XOR MLP with step function
+x_test = np.array([[0, 0], [0, 1], [1, 0], [1, 1]])
+y_expected_xor = np.array([0, 1, 1, 0])
+
+Output:- 
+XOR Gate using Step Function:
+Input: [0 0],0,0
+Input: [0 1],1,1
+Input: [1 0],1,1
+Input: [1 1],0,0
+
+
+(b) XOR Gate using Multilayer Perceptron with Sigmoid Function
+
+import numpy as np
+
+# Sigmoid function
+def sigmoid_function(z):
+    return 1 / (1 + np.exp(-z))
+
+# OR gate using sigmoid 
+def OR_perceptron_sigmoid(x):
+    w = np.array([10, 10])
+    b = -5
+    z = np.dot(x, w) + b
+    return sigmoid_function(z)
+
+# NAND gate using sigmoid 
+def NAND_perceptron_sigmoid(x):
+    w = np.array([-10, -10])
+    b = 15
+    z = np.dot(x, w) + b
+    return sigmoid_function(z)
+
+# AND gate using sigmoid
+def AND_perceptron_sigmoid(x):
+    w = np.array([10, 10])
+    b = -15
+    z = np.dot(x, w) + b
+    return sigmoid_function(z)
+
+#  XOR gate using sigmoid function
+def XOR_MLP_sigmoid(x, threshold=0.5):
+   
+    h1_raw = OR_perceptron_sigmoid(x)
+    h1 = 1 if h1_raw >= threshold else 0 
+
+   
+    h2_raw = NAND_perceptron_sigmoid(x)
+    h2 = 1 if h2_raw >= threshold else 0 
+
+    output_input = np.array([h1, h2])
+    y_raw = AND_perceptron_sigmoid(output_input)
+    y = 1 if y_raw >= threshold else 0
+
+    return y
+
+# Test the XOR MLP with sigmoid function
+x_test = np.array([[0, 0], [0, 1], [1, 0], [1, 1]])
+y_expected_xor = np.array([0, 1, 1, 0])
+
+print("\nXOR Gate using Sigmoid Function:")
+for i, x in enumerate(x_test):
+    prediction = XOR_MLP_sigmoid(x)
+    print(f"Input: {x}, {prediction}, {y_expected_xor[i]}")
+
+Output: -
+
+XOR Gate using Sigmoid Function:
+Input: [0 0], 0, 0
+Input: [0 1], 1, 1
+Input: [1 0], 1, 1
+Input: [1 1], 0, 0
