@@ -1,0 +1,327 @@
+Experiment: - 8
+
+import tensorflow as tf
+from tensorflow.keras.datasets import mnist
+from tensorflow.keras.utils import to_categorical
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense, Flatten
+import numpy as np
+
+# Load dataset
+(X_train, y_train), (X_test, y_test) = mnist.load_data()
+
+# Normalize
+X_train = X_train / 255.0
+X_test = X_test / 255.0
+
+# Flatten
+X_train = X_train.reshape(-1, 784)
+X_test = X_test.reshape(-1, 784)
+
+# One-hot encoding
+y_train = to_categorical(y_train, 10)
+y_test = to_categorical(y_test, 10)
+
+# Model
+
+model = Sequential([
+    Dense(10, activation='softmax', input_shape=(784,))
+])
+
+model.compile(optimizer='adam',
+              loss='categorical_crossentropy',
+              metrics=['accuracy'])
+
+model.summary()
+
+model.fit(X_train, y_train, epochs=10, batch_size=128)
+
+test_loss, test_acc = model.evaluate(X_test, y_test)
+print("Test accuracy:", test_acc)
+
+import tensorflow as tf
+from tensorflow.keras.datasets import mnist
+from tensorflow.keras.utils import to_categorical
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense, Flatten
+import numpy as np
+
+# Load dataset
+(X_train, y_train), (X_test, y_test) = mnist.load_data()
+
+# Normalize
+X_train = X_train / 255.0
+X_test = X_test / 255.0
+
+# Flatten
+X_train = X_train.reshape(-1, 784)
+X_test = X_test.reshape(-1, 784)
+
+# One-hot encoding
+y_train = to_categorical(y_train, 10)
+y_test = to_categorical(y_test, 10)
+
+# Model
+
+model = Sequential([
+    Dense(10, activation='softmax', input_shape=(784,))
+])
+
+model.compile(optimizer='adam',
+              loss='categorical_crossentropy',
+              metrics=['accuracy'])
+
+model.summary()
+
+model.fit(X_train, y_train, epochs=15, batch_size=128)
+
+test_loss, test_acc = model.evaluate(X_test, y_test)
+print("Test accuracy:", test_acc)
+
+import tensorflow as tf
+from tensorflow.keras.datasets import mnist
+from tensorflow.keras.utils import to_categorical
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense, Flatten
+import numpy as np
+
+# Load dataset
+(X_train, y_train), (X_test, y_test) = mnist.load_data()
+
+# Normalize
+X_train = X_train / 255.0
+X_test = X_test / 255.0
+
+# Flatten
+X_train = X_train.reshape(-1, 784)
+X_test = X_test.reshape(-1, 784)
+
+# One-hot encoding
+y_train = to_categorical(y_train, 10)
+y_test = to_categorical(y_test, 10)
+
+# Model
+
+model = Sequential([
+    Dense(10, activation='softmax', input_shape=(784,))
+])
+
+model.compile(optimizer='adam',
+              loss='categorical_crossentropy',
+              metrics=['accuracy'])
+
+model.summary()
+
+model.fit(X_train, y_train, epochs=20, batch_size=128)
+
+test_loss, test_acc = model.evaluate(X_test, y_test)
+print("Test accuracy:", test_acc)
+
+import tensorflow as tf
+from tensorflow.keras.datasets import mnist
+from tensorflow.keras.utils import to_categorical
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense, Flatten
+import numpy as np
+
+# Load dataset
+(X_train, y_train), (X_test, y_test) = mnist.load_data()
+
+# Normalize
+X_train = X_train / 255.0
+X_test = X_test / 255.0
+
+# Flatten
+X_train = X_train.reshape(-1, 784)
+X_test = X_test.reshape(-1, 784)
+
+# One-hot encoding
+y_train = to_categorical(y_train, 10)
+y_test = to_categorical(y_test, 10)
+
+# Model
+
+model = Sequential([
+    Dense(10, activation='softmax', input_shape=(784,))
+])
+
+model.compile(optimizer='adam',
+              loss='categorical_crossentropy',
+              metrics=['accuracy'])
+
+model.summary()
+
+model.fit(X_train, y_train, epochs=10, batch_size=0)
+
+test_loss, test_acc = model.evaluate(X_test, y_test)
+print("Test accuracy:", test_acc)
+
+no of epoch  10 , No of batch_size 32 , Accuracy - 0.9266999959945679  
+no of epoch  10 , No of batch_size 128 , Accuracy - 0.9244999885559082  
+no of epoch  10 , No of batch_size 256 , Accuracy - 0.9230999946594238   
+no of epoch  15 , No of batch_size 32 , Accuracy - 0.9280999898910522  
+no of epoch  15 , No of batch_size 128 , Accuracy - 0.9262999892234802   
+no of epoch  15 , No of batch_size 256 , Accuracy - 0.9262999892234802   
+no of epoch  20 , No of batch_size 32 , Accuracy - 0.9279999732971191  
+no of epoch  20 , No of batch_size 128 , Accuracy - 0.9276999831199646  
+no of epoch  20 , No of batch_size 256 , Accuracy - 0.927299976348877
+
+
+'''print any one input
+
+
+import tensorflow as tf
+from tensorflow.keras.datasets import mnist
+from tensorflow.keras.utils import to_categorical
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense, Flatten
+import numpy as np
+
+# Load dataset
+(X_train, y_train), (X_test, y_test) = mnist.load_data()
+
+# Normalize
+X_train = X_train / 255.0
+X_test = X_test / 255.0
+
+# Flatten
+X_train = X_train.reshape(-1, 784)
+X_test = X_test.reshape(-1, 784)
+
+# One-hot encoding
+y_train = to_categorical(y_train, 10)
+y_test = to_categorical(y_test, 10)
+
+# Model
+model = Sequential([
+    Dense(32, activation='relu', input_shape=(784,)),
+    Dense(10, activation='softmax')
+])
+
+model.compile(optimizer='adam',
+              loss='categorical_crossentropy',
+              metrics=['accuracy'])
+
+model.summary()
+
+model.fit(X_train, y_train, epochs=10, batch_size=32)
+
+test_loss, test_acc = model.evaluate(X_test, y_test)
+print("Test accuracy:", test_acc)
+
+import tensorflow as tf
+from tensorflow.keras.datasets import mnist
+from tensorflow.keras.utils import to_categorical
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense
+import numpy as np
+import cv2
+import matplotlib.pyplot as plt
+
+# Load dataset
+(X_train, y_train), (X_test, y_test) = mnist.load_data()
+
+# Normalize
+X_train = X_train / 255.0
+X_test = X_test / 255.0
+
+# Flatten
+X_train = X_train.reshape(-1,784)
+X_test = X_test.reshape(-1,784)
+
+# One hot encoding
+y_train = to_categorical(y_train,10)
+y_test = to_categorical(y_test,10)
+
+# Model
+model = Sequential([
+    Dense(32, activation='relu', input_shape=(784,)),
+    Dense(10, activation='softmax')
+])
+
+model.compile(optimizer='adam',
+              loss='categorical_crossentropy',
+              metrics=['accuracy'])
+
+# Train model
+model.fit(X_train, y_train, epochs=10, batch_size=32)
+
+# Load image from PC
+img_path = "gg.png"
+
+img = cv2.imread(img_path, cv2.IMREAD_GRAYSCALE)
+
+img = cv2.resize(img,(28,28))
+img = 255 - img
+img = img / 255.0
+
+img = img.reshape(1,784)
+
+prediction = model.predict(img)
+digit = np.argmax(prediction)
+
+print("Predicted Digit:", digit)
+
+plt.imshow(img.reshape(28,28), cmap='gray')
+plt.title("Predicted Digit: " + str(digit))
+plt.axis('off')
+plt.show()
+
+
+import tensorflow as tf
+from tensorflow.keras.datasets import mnist
+from tensorflow.keras.utils import to_categorical
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense
+import numpy as np
+import cv2
+import matplotlib.pyplot as plt
+
+# Load dataset
+(X_train, y_train), (X_test, y_test) = mnist.load_data()
+
+# Normalize
+X_train = X_train / 255.0
+X_test = X_test / 255.0
+
+# Flatten
+X_train = X_train.reshape(-1,784)
+X_test = X_test.reshape(-1,784)
+
+# One hot encoding
+y_train = to_categorical(y_train,10)
+y_test = to_categorical(y_test,10)
+
+# Model
+model = Sequential([
+    Dense(32, activation='relu', input_shape=(784,)),
+    Dense(10, activation='softmax')
+])
+
+model.compile(optimizer='adam',
+              loss='categorical_crossentropy',
+              metrics=['accuracy'])
+
+# Train model
+model.fit(X_train, y_train, epochs=10, batch_size=32)
+
+# Load image from PC
+img_path = "ee.png"
+
+img = cv2.imread(img_path, cv2.IMREAD_GRAYSCALE)
+
+img = cv2.resize(img,(28,28))
+img = 255 - img
+img = img / 255.0
+
+img = img.reshape(1,784)
+
+prediction = model.predict(img)
+digit = np.argmax(prediction)
+
+print("Predicted Digit:", digit)
+
+plt.imshow(img.reshape(28,28), cmap='gray')
+plt.title("Predicted Digit: " + str(digit))
+plt.axis('off')
+plt.show()
